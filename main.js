@@ -1,9 +1,10 @@
 const container = document.getElementById('container')
-const box = document.createElement('div')
-// const text = document.createTextNode(' ')
-box.classList.add('box')
-// box.appendChild(text)
-container.appendChild(box)
 
+const createBox = () => {
+    const box = document.createElement('div');
+    box.classList.add('box');
+    container.appendChild(box);
+    return box;
+}
 
-console.log(box);
+    
