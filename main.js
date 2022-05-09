@@ -1,9 +1,12 @@
 const container = document.getElementById('container')
 
-const createBox = () => {
-    const box = document.createElement('div');
-    box.classList.add('box');
-    return box;
+const createBox = (number) => {
+    const size = 32 // calculating by px; 32px is roughly 2rem which is the initial size I like
+    const box = document.createElement('div')
+    box.classList.add('box')
+    box.style.width = `${size / number}rem`
+    box.style.height = `${size / number}rem`
+    return box
 }
 
 const createRow = () => {
@@ -16,14 +19,11 @@ const createGrid = (gridSize) => {
     for (let i = 0; i < gridSize; i++) {
         const row = createRow()
         for (let j = 0; j < gridSize; j++) {
-            const box = createBox()
+            const box = createBox(gridSize)
             row.appendChild(box)
         }
         container.appendChild(row)
     }
 }
 
-createGrid(16)
-
-
-
+createGrid(10)
