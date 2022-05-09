@@ -4,21 +4,50 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: black;
-    color: peachpuff;
+#window-container {
+    display: flex;
+    padding: 5rem;
 }
 
-#container {
+#tool-box {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    padding: 2rem;
+    border: 2px solid black;
+    border-right: none;
+}
+
+/* FROM STACK OVERFLOW */
+input[type=color] {
     margin: auto;
-    margin-top: 6rem;
+    width: 4rem;
+    height: 4rem; 
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+/* ^^FROM STACK OVERFLOW^^ */
+
+#grid-container {
+
     width: fit-content;
-    border: 2px solid green;
+    border: 2px solid black;
     padding: 2rem;
 }
 
 .box {
-    /* border: 0.25px solid white; */
+    border: 0.01px solid lightgrey;
     display: inline-block;
 }
 

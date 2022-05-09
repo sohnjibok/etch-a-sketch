@@ -1,4 +1,4 @@
-const container = document.getElementById('container')
+const gridContainer = document.getElementById('grid-container')
 
 const createBox = (number) => {
     const size = 32 // calculating by px; 32px is roughly 2rem which is the initial size I like
@@ -22,7 +22,7 @@ const createGrid = (gridSize) => {
             const box = createBox(gridSize)
             row.appendChild(box)
         }
-        container.appendChild(row)
+        gridContainer.appendChild(row)
     }
 }
 
@@ -35,5 +35,5 @@ const selectColor = (color) => {
     })
 }
 
-createGrid(20)
-selectColor('red')
+createGrid(30)
+selectColor('blue')
