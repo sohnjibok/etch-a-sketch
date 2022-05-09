@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: peachpuff;
+}
+
+.box {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid white;
+}
