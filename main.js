@@ -26,4 +26,14 @@ const createGrid = (gridSize) => {
     }
 }
 
-createGrid(10)
+const selectColor = (color) => {
+    const boxes = document.querySelectorAll('.box')
+    boxes.forEach(element => {
+        element.addEventListener('mouseover', (event) => {
+            event.target.style.backgroundColor = color
+        })
+    })
+}
+
+createGrid(20)
+selectColor('red')
