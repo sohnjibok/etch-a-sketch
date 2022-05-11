@@ -20,7 +20,7 @@ const createRowOfBoxes = (boxesInRow) => {
 }
 
 const createGridFromRows = (numberOfRows) => {
-    if(gridContainer.firstChild) clearGrid()
+    if (gridContainer.firstChild) clearGrid()
     for (let i = 0; i < numberOfRows; i++) {
         const row = createRowOfBoxes(numberOfRows)
         gridContainer.appendChild(row)
@@ -28,26 +28,13 @@ const createGridFromRows = (numberOfRows) => {
 }
 
 const clearGrid = () => {
-    while(gridContainer.firstChild) {
+    while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild)
     }
 }
 
-
-let elements = {};
-['lowRes','medRes','highRes'].forEach(item => elements = {...elements, [item] : document.getElementsByClassName(item)})
-const {lowRes, medRes, highRes} = elements
-lowRes[0].addEventListener('click', () => createGridFromRows(10))
-medRes[0].addEventListener('click', () => createGridFromRows(30))
-highRes[0].addEventListener('click', () => createGridFromRows(60))
-
-
-console.log(gridContainer.firstChild)
-
-
-
 const activateBoxColorChange = (event) => {
-    event.target.style.backgroundColor = 'black'
+    event.target.style.backgroundColor = color.value
 }
 
 const toggleDrawOnGrid = (beginDrawing) => {
@@ -63,8 +50,22 @@ const toggleDrawOnGrid = (beginDrawing) => {
     }
 }
 
+createGridFromRows(10) // initial grid size
+
+const [color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
+    ['color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
+        .map(className => document.getElementsByClassName(className)).map(item => item[0])
+
+potatoRes.addEventListener('click', () => createGridFromRows(10))
+lowRes.addEventListener('click', () => createGridFromRows(20))
+medRes.addEventListener('click', () => createGridFromRows(40))
+highRes.addEventListener('click', () => createGridFromRows(60))
+extremeRes.addEventListener('click', () => createGridFromRows(80))
+lifeLikeRes.addEventListener('click', () => createGridFromRows(100))
+
 let beginDrawing = false
 gridContainer.addEventListener('click', () => {
     beginDrawing = !beginDrawing
     toggleDrawOnGrid(beginDrawing)
 })
+

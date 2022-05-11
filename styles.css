@@ -17,7 +17,7 @@
     border-right: none;
 }
 
-/* FROM STACK OVERFLOW */
+/* FROM STACK OVERFLOW - color button is now circular */
 input[type=color] {
     margin: auto;
     width: 4rem;
@@ -40,7 +40,6 @@ input[type=color]::-webkit-color-swatch-wrapper {
 /* ^^FROM STACK OVERFLOW^^ */
 
 #grid-container {
-
     width: fit-content;
     border: 2px solid black;
     padding: 2rem;
