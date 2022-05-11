@@ -1,39 +1,71 @@
 const gridContainer = document.getElementById('grid-container')
 
-const createBox = (number) => {
-    const size = 32 // calculating by px; 32px is roughly 2rem which is the initial size I like
+const createBoxElement = (sizeOfBoxes) => {
+    const sizeInPixels = 32
     const box = document.createElement('div')
     box.classList.add('box')
-    box.style.width = `${size / number}rem`
-    box.style.height = `${size / number}rem`
+    box.style.width = `${sizeInPixels / sizeOfBoxes}rem`
+    box.style.height = `${sizeInPixels / sizeOfBoxes}rem`
     return box
 }
 
-const createRow = () => {
+const createRowOfBoxes = (boxesInRow) => {
     const row = document.createElement('div')
     row.classList.add('row')
+    for (let i = 0; i < boxesInRow; i++) {
+        const box = createBoxElement(boxesInRow)
+        row.appendChild(box)
+    }
     return row
 }
 
-const createGrid = (gridSize) => {
-    for (let i = 0; i < gridSize; i++) {
-        const row = createRow()
-        for (let j = 0; j < gridSize; j++) {
-            const box = createBox(gridSize)
-            row.appendChild(box)
-        }
+const createGridFromRows = (numberOfRows) => {
+    if (gridContainer.firstChild) clearGrid()
+    for (let i = 0; i < numberOfRows; i++) {
+        const row = createRowOfBoxes(numberOfRows)
         gridContainer.appendChild(row)
     }
 }
 
-const selectColor = (color) => {
-    const boxes = document.querySelectorAll('.box')
-    boxes.forEach(element => {
-        element.addEventListener('mouseover', (event) => {
-            event.target.style.backgroundColor = color
-        })
-    })
+const clearGrid = () => {
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild)
+    }
 }
 
-createGrid(30)
-selectColor('blue')
+const activateBoxColorChange = (event) => {
+    event.target.style.backgroundColor = color.value
+}
+
+const toggleDrawOnGrid = (beginDrawing) => {
+    const boxes = document.querySelectorAll('.box')
+    if (beginDrawing) {
+        boxes.forEach(element => {
+            element.addEventListener('mousemove', activateBoxColorChange)
+        })
+    } else {
+        boxes.forEach(element => {
+            element.removeEventListener('mousemove', activateBoxColorChange)
+        })
+    }
+}
+
+createGridFromRows(10) // initial grid size
+
+const [color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
+    ['color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
+        .map(className => document.getElementsByClassName(className)).map(item => item[0])
+
+potatoRes.addEventListener('click', () => createGridFromRows(10))
+lowRes.addEventListener('click', () => createGridFromRows(20))
+medRes.addEventListener('click', () => createGridFromRows(40))
+highRes.addEventListener('click', () => createGridFromRows(60))
+extremeRes.addEventListener('click', () => createGridFromRows(80))
+lifeLikeRes.addEventListener('click', () => createGridFromRows(100))
+
+let beginDrawing = false
+gridContainer.addEventListener('click', () => {
+    beginDrawing = !beginDrawing
+    toggleDrawOnGrid(beginDrawing)
+})
+
