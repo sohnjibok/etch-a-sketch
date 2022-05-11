@@ -1,25 +1,25 @@
 const gridContainer = document.getElementById('grid-container')
 
-const createBox = (number) => {
-    const size = 32 // calculating by px; 32px is roughly 2rem which is the initial size I like
+const createBoxElement = (number) => {
+    const sizeInPixels = 32 // calculating by px; 32px is roughly 2rem which is the initial size I like
     const box = document.createElement('div')
     box.classList.add('box')
-    box.style.width = `${size / number}rem`
-    box.style.height = `${size / number}rem`
+    box.style.width = `${sizeInPixels / number}rem`
+    box.style.height = `${sizeInPixels / number}rem`
     return box
 }
 
-const createRow = () => {
+const createRowOfBoxes = () => {
     const row = document.createElement('div')
     row.classList.add('row')
     return row
 }
 
-const createGrid = (gridSize) => {
+const createGridFromRows = (gridSize) => {
     for (let i = 0; i < gridSize; i++) {
-        const row = createRow()
+        const row = createRowOfBoxes()
         for (let j = 0; j < gridSize; j++) {
-            const box = createBox(gridSize)
+            const box = createBoxElement(gridSize)
             row.appendChild(box)
         }
         gridContainer.appendChild(row)
@@ -35,5 +35,5 @@ const selectColor = (color) => {
     })
 }
 
-createGrid(30)
-selectColor('blue')
+createGridFromRows(50)
+selectColor('yellow')
