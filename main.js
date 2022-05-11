@@ -1,7 +1,7 @@
 const gridContainer = document.getElementById('grid-container')
 
 const createBoxElement = (sizeOfBoxes) => {
-    const sizeInPixels = 32
+    const sizeInPixels = 35
     const box = document.createElement('div')
     box.classList.add('box')
     box.style.width = `${sizeInPixels / sizeOfBoxes}rem`
@@ -56,6 +56,7 @@ const [color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
     ['color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
         .map(className => document.getElementsByClassName(className)).map(item => item[0])
 
+// Resolution buttons
 potatoRes.addEventListener('click', () => createGridFromRows(10))
 lowRes.addEventListener('click', () => createGridFromRows(20))
 medRes.addEventListener('click', () => createGridFromRows(40))
