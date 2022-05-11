@@ -1,11 +1,11 @@
 const gridContainer = document.getElementById('grid-container')
 
-const createBoxElement = (numberOfBoxes) => {
+const createBoxElement = (sizeOfBoxes) => {
     const sizeInPixels = 32
     const box = document.createElement('div')
     box.classList.add('box')
-    box.style.width = `${sizeInPixels / numberOfBoxes}rem`
-    box.style.height = `${sizeInPixels / numberOfBoxes}rem`
+    box.style.width = `${sizeInPixels / sizeOfBoxes}rem`
+    box.style.height = `${sizeInPixels / sizeOfBoxes}rem`
     return box
 }
 
@@ -19,14 +19,31 @@ const createRowOfBoxes = (boxesInRow) => {
     return row
 }
 
-const createGridFromRows = (boxesInRow) => {
-    for (let i = 0; i < boxesInRow; i++) {
-        const row = createRowOfBoxes(boxesInRow)
+const createGridFromRows = (numberOfRows) => {
+    if(gridContainer.firstChild) clearGrid()
+    for (let i = 0; i < numberOfRows; i++) {
+        const row = createRowOfBoxes(numberOfRows)
         gridContainer.appendChild(row)
     }
 }
 
-createGridFromRows(10)
+const clearGrid = () => {
+    while(gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild)
+    }
+}
+
+
+let elements = {};
+['lowRes','medRes','highRes'].forEach(item => elements = {...elements, [item] : document.getElementsByClassName(item)})
+const {lowRes, medRes, highRes} = elements
+lowRes[0].addEventListener('click', () => createGridFromRows(10))
+medRes[0].addEventListener('click', () => createGridFromRows(30))
+highRes[0].addEventListener('click', () => createGridFromRows(60))
+
+
+console.log(gridContainer.firstChild)
+
 
 
 const activateBoxColorChange = (event) => {
