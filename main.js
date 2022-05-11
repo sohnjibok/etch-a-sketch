@@ -9,46 +9,45 @@ const createBoxElement = (numberOfBoxes) => {
     return box
 }
 
-const createRowContainer = () => {
+const createRowOfBoxes = (boxesInRow) => {
     const row = document.createElement('div')
     row.classList.add('row')
+    for (let i = 0; i < boxesInRow; i++) {
+        const box = createBoxElement(boxesInRow)
+        row.appendChild(box)
+    }
     return row
 }
 
-const createGridFromRows = (gridSize) => {
-    for (let i = 0; i < gridSize; i++) {
-        const row = createRowContainer()
-        for (let j = 0; j < gridSize; j++) {
-            const box = createBoxElement(gridSize)
-            row.appendChild(box)
-        }
+const createGridFromRows = (boxesInRow) => {
+    for (let i = 0; i < boxesInRow; i++) {
+        const row = createRowOfBoxes(boxesInRow)
         gridContainer.appendChild(row)
     }
 }
 
-const activatePen = (event) => {
+createGridFromRows(10)
+
+
+const activateBoxColorChange = (event) => {
     event.target.style.backgroundColor = 'black'
 }
 
-const toggleDrawOnGrid = (toggleOn) => {
+const toggleDrawOnGrid = (beginDrawing) => {
     const boxes = document.querySelectorAll('.box')
-    if (toggleOn) {
+    if (beginDrawing) {
         boxes.forEach(element => {
-            element.addEventListener('mousemove', activatePen)
+            element.addEventListener('mousemove', activateBoxColorChange)
         })
     } else {
         boxes.forEach(element => {
-            element.removeEventListener('mousemove', activatePen)
+            element.removeEventListener('mousemove', activateBoxColorChange)
         })
     }
 }
 
-createGridFromRows(50)
-
-const drawButton = document.querySelector('#draw')
-let toggleOn = false
-
+let beginDrawing = false
 gridContainer.addEventListener('click', () => {
-    toggleOn = !toggleOn
-    toggleDrawOnGrid(toggleOn)
+    beginDrawing = !beginDrawing
+    toggleDrawOnGrid(beginDrawing)
 })
