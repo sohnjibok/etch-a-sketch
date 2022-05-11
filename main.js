@@ -52,9 +52,12 @@ const toggleDrawOnGrid = (beginDrawing) => {
 
 createGridFromRows(10) // initial grid size
 
-const [color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
-    ['color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
+const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn, 
+    color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
+    ['regularBrush', 'shadingBrush', 'randomBrush', 'eraserBrush', 
+    'color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
         .map(className => document.getElementsByClassName(className)).map(item => item[0])
+
 
 // Resolution buttons
 potatoRes.addEventListener('click', () => createGridFromRows(10))

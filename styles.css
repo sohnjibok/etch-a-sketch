@@ -28,13 +28,19 @@ button:hover {
     color: white;
 }
 
+button:active {
+    border: none;
+}
+
 #tool-box {
     font-family: Arial, Helvetica, sans-serif;
     background-color: whitesmoke;
     width: 20rem;
+    max-height: 40rem;
     padding: 2rem;
     margin-right: 1rem;
     border: 1px solid black;
+    overflow: auto;
 }
 
 .color-menu p {
