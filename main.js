@@ -40,6 +40,7 @@ const resetBrushClickedClass = () => {
 
 const turnOffOtherButtons = () => {
     regularBrushIsOn = false
+    randomBrushIsOn = false
     eraserBrushIsOn = false
 }
 
@@ -48,8 +49,14 @@ const toggleButtonClicked = (button) => {
     button.classList.toggle('button-clicked')
 }
 
+const getRandomColor = () => {
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    return `#${randomColor}`
+}
+
 const activateBoxColorChange = (event) => {
     if(regularBrushIsOn) event.target.style.backgroundColor = color.value
+    if(randomBrushIsOn) event.target.style.backgroundColor = getRandomColor()
     if (eraserBrushIsOn) event.target.style.backgroundColor = 'white'
 }
 
@@ -57,6 +64,12 @@ const toggleRegularBrush = (event) => {
     toggleButtonClicked(event.target)
     turnOffOtherButtons()
     regularBrushIsOn = !regularBrushIsOn
+}
+
+const toggleRandomBrush = (event) => {
+    toggleButtonClicked(event.target)
+    turnOffOtherButtons()
+    randomBrushIsOn = !regularBrushIsOn
 }
 
 const toggleEraserBrush = (event) => {
@@ -89,6 +102,9 @@ const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn,
 // Brush buttons
 regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
 let regularBrushIsOn = true // This will be the default pen
+
+randomBrushBtn.addEventListener('click', (event) => toggleRandomBrush(event))
+let randomBrushIsOn = false
 
 eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
 let eraserBrushIsOn = false
