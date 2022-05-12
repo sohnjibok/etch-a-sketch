@@ -88,7 +88,7 @@ const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn,
 
 // Brush buttons
 regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
-let regularBrushIsOn = false
+let regularBrushIsOn = true // This will be the default pen
 
 eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
 let eraserBrushIsOn = false
