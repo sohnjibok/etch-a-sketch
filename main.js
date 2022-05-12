@@ -49,6 +49,12 @@ const toggleButtonClicked = (button) => {
     button.classList.toggle('button-clicked')
 }
 
+const getShadedColor = (color) => {
+    const rgb_to_rgba_color = color.replace(/rgb/i, "rgba")
+    const shadedColor = rgb_to_rgba_color.replace(/\)/i,',0.75)')
+    return shadedColor
+}
+
 const getRandomColor = () => {
     const randomColor = Math.floor(Math.random()*16777215).toString(16);
     return `#${randomColor}`
@@ -56,6 +62,8 @@ const getRandomColor = () => {
 
 const activateBoxColorChange = (event) => {
     if(regularBrushIsOn) event.target.style.backgroundColor = color.value
+    // console.log(event.target.style.backgroundColor);
+    if(shadingBrushIsOn) event.target.style.backgroundColor = getShadedColor(event.target.style.backgroundColor)
     if(randomBrushIsOn) event.target.style.backgroundColor = getRandomColor()
     if (eraserBrushIsOn) event.target.style.backgroundColor = 'white'
 }
@@ -64,6 +72,12 @@ const toggleRegularBrush = (event) => {
     toggleButtonClicked(event.target)
     turnOffOtherButtons()
     regularBrushIsOn = !regularBrushIsOn
+}
+
+const toggleShadingBrush = (event) => {
+    toggleButtonClicked(event.target)
+    turnOffOtherButtons()
+    shadingBrushIsOn = !shadingBrushIsOn
 }
 
 const toggleRandomBrush = (event) => {
@@ -96,7 +110,6 @@ const toggleDrawOnGrid = (beginDrawing) => {
             element.removeEventListener('mouseover', activateBoxColorChange)
         })
     }
-    console.log('rand',randomBrushIsOn, 'draw', beginDrawing);
 }
 
 createGridFromRows(10) // initial grid size
@@ -110,6 +123,9 @@ const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn,
 // Brush buttons
 regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
 let regularBrushIsOn = true // This will be the default pen
+
+shadingBrushBtn.addEventListener('click', (event) => toggleShadingBrush(event))
+let shadingBrushIsOn = false
 
 randomBrushBtn.addEventListener('click', (event) => toggleRandomBrush(event))
 let randomBrushIsOn = false
