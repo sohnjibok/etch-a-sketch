@@ -23,13 +23,18 @@ button {
     text-transform: uppercase;
 }
 
-button:hover {
-    background-color: black;
+button:active {
+    border: none;
+} 
+
+.button-clicked {
+    background-color: green;
     color: white;
 }
 
-button:active {
-    border: none;
+button:hover {
+    background-color: black;
+    color: white;
 }
 
 #tool-box {

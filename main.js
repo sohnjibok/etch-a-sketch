@@ -33,10 +33,35 @@ const clearGrid = () => {
     }
 }
 
+const resetBrushClickedClass = () => {
+    [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn].forEach(button => button.classList.remove('button-clicked'))
+}
+ 
+const toggleButtonClicked = (button) => {
+    resetButtonClickedClass()
+    button.classList.toggle('button-clicked')
+}
+
 const activateBoxColorChange = (event) => {
     event.target.style.backgroundColor = color.value
 }
 
+const toggleRegularBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleShadingBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleRandomBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleEraserBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+ 
 const toggleDrawOnGrid = (beginDrawing) => {
     const boxes = document.querySelectorAll('.box')
     if (beginDrawing) {
@@ -57,6 +82,12 @@ const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn,
     ['regularBrush', 'shadingBrush', 'randomBrush', 'eraserBrush', 
     'color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
         .map(className => document.getElementsByClassName(className)).map(item => item[0])
+
+// Brush buttons
+regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
+shadingBrushBtn.addEventListener('click', (event) => toggleShadingBrush(event))
+randomBrushBtn.addEventListener('click', (event) => toggleRandomBrush(event))
+eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
 
 
 // Resolution buttons
