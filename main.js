@@ -34,34 +34,37 @@ const clearGrid = () => {
 }
 
 const resetBrushClickedClass = () => {
-    [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn].forEach(button => button.classList.remove('button-clicked'))
+    [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn]
+        .forEach(button => button.classList.remove('button-clicked'))
 }
- 
+
+const turnOffOtherButtons = () => {
+    regularBrushIsOn = false
+    eraserBrushIsOn = false
+}
+
 const toggleButtonClicked = (button) => {
-    resetButtonClickedClass()
+    resetBrushClickedClass()
     button.classList.toggle('button-clicked')
 }
 
 const activateBoxColorChange = (event) => {
-    event.target.style.backgroundColor = color.value
+    if(regularBrushIsOn) event.target.style.backgroundColor = color.value
+    if (eraserBrushIsOn) event.target.style.backgroundColor = 'white'
 }
 
 const toggleRegularBrush = (event) => {
     toggleButtonClicked(event.target)
-}
-
-const toggleShadingBrush = (event) => {
-    toggleButtonClicked(event.target)
-}
-
-const toggleRandomBrush = (event) => {
-    toggleButtonClicked(event.target)
+    turnOffOtherButtons()
+    regularBrushIsOn = !regularBrushIsOn
 }
 
 const toggleEraserBrush = (event) => {
     toggleButtonClicked(event.target)
+    turnOffOtherButtons()
+    eraserBrushIsOn = !eraserBrushIsOn
 }
- 
+
 const toggleDrawOnGrid = (beginDrawing) => {
     const boxes = document.querySelectorAll('.box')
     if (beginDrawing) {
@@ -77,18 +80,18 @@ const toggleDrawOnGrid = (beginDrawing) => {
 
 createGridFromRows(10) // initial grid size
 
-const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn, 
+const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn,
     color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
-    ['regularBrush', 'shadingBrush', 'randomBrush', 'eraserBrush', 
-    'color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
+    ['regularBrush', 'shadingBrush', 'randomBrush', 'eraserBrush',
+        'color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
         .map(className => document.getElementsByClassName(className)).map(item => item[0])
 
 // Brush buttons
 regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
-shadingBrushBtn.addEventListener('click', (event) => toggleShadingBrush(event))
-randomBrushBtn.addEventListener('click', (event) => toggleRandomBrush(event))
-eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
+let regularBrushIsOn = false
 
+eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
+let eraserBrushIsOn = false
 
 // Resolution buttons
 potatoRes.addEventListener('click', () => createGridFromRows(10))
