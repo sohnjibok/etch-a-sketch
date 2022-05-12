@@ -1,7 +1,7 @@
 const gridContainer = document.getElementById('grid-container')
 
 const createBoxElement = (sizeOfBoxes) => {
-    const sizeInPixels = 32
+    const sizeInPixels = 35
     const box = document.createElement('div')
     box.classList.add('box')
     box.style.width = `${sizeInPixels / sizeOfBoxes}rem`
@@ -33,10 +33,35 @@ const clearGrid = () => {
     }
 }
 
+const resetBrushClickedClass = () => {
+    [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn].forEach(button => button.classList.remove('button-clicked'))
+}
+ 
+const toggleButtonClicked = (button) => {
+    resetButtonClickedClass()
+    button.classList.toggle('button-clicked')
+}
+
 const activateBoxColorChange = (event) => {
     event.target.style.backgroundColor = color.value
 }
 
+const toggleRegularBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleShadingBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleRandomBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+
+const toggleEraserBrush = (event) => {
+    toggleButtonClicked(event.target)
+}
+ 
 const toggleDrawOnGrid = (beginDrawing) => {
     const boxes = document.querySelectorAll('.box')
     if (beginDrawing) {
@@ -52,10 +77,20 @@ const toggleDrawOnGrid = (beginDrawing) => {
 
 createGridFromRows(10) // initial grid size
 
-const [color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
-    ['color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
+const [regularBrushBtn, shadingBrushBtn, randomBrushBtn, eraserBrushBtn, 
+    color, potatoRes, lowRes, medRes, highRes, extremeRes, lifeLikeRes] =
+    ['regularBrush', 'shadingBrush', 'randomBrush', 'eraserBrush', 
+    'color', 'potatoRes', 'lowRes', 'medRes', 'highRes', 'extremeRes', 'lifeLikeRes']
         .map(className => document.getElementsByClassName(className)).map(item => item[0])
 
+// Brush buttons
+regularBrushBtn.addEventListener('click', (event) => toggleRegularBrush(event))
+shadingBrushBtn.addEventListener('click', (event) => toggleShadingBrush(event))
+randomBrushBtn.addEventListener('click', (event) => toggleRandomBrush(event))
+eraserBrushBtn.addEventListener('click', (event) => toggleEraserBrush(event))
+
+
+// Resolution buttons
 potatoRes.addEventListener('click', () => createGridFromRows(10))
 lowRes.addEventListener('click', () => createGridFromRows(20))
 medRes.addEventListener('click', () => createGridFromRows(40))
