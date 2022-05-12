@@ -80,15 +80,23 @@ const toggleEraserBrush = (event) => {
 
 const toggleDrawOnGrid = (beginDrawing) => {
     const boxes = document.querySelectorAll('.box')
-    if (beginDrawing) {
+    if (!randomBrushIsOn && beginDrawing) {
         boxes.forEach(element => {
             element.addEventListener('mousemove', activateBoxColorChange)
+        })
+    } else if(randomBrushIsOn && beginDrawing) {
+        boxes.forEach(element => {
+            element.addEventListener('mouseover', activateBoxColorChange)
         })
     } else {
         boxes.forEach(element => {
             element.removeEventListener('mousemove', activateBoxColorChange)
         })
+        boxes.forEach(element => {
+            element.removeEventListener('mouseover', activateBoxColorChange)
+        })
     }
+    console.log('rand',randomBrushIsOn, 'draw', beginDrawing);
 }
 
 createGridFromRows(10) // initial grid size
